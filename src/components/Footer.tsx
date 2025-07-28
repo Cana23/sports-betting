@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-white/10 bg-neutral-950 text-gray-300 font-[Inter]">
       <div className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-10">
-        {/* Descripción */}
+
         <div className="col-span-2">
           <h2 className="text-white font-bold text-xl mb-2">Sports betting</h2>
           <p className="text-gray-400 text-sm leading-relaxed mb-4">
@@ -32,7 +32,6 @@ export default function Footer() {
           </div> */}
         </div>
 
-        {/* Enlaces */}
         <div>
           <h3 className="text-white font-semibold text-sm mb-3">Contenido</h3>
           <ul className="space-y-1 text-sm">

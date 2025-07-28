@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import ComingSoonCard from '../components/ComingSoonCard/ComingSoonCard';
 
 interface Team {
   id: string;
@@ -16,16 +17,16 @@ interface TeamSelectionProps {
 const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
   const [teams, setTeams] = useState<Team[]>([
     {
-      id: 'arsenal',
-      name: 'Arsenal FC',
-      logo: '/src/assets/images/teams/arsenal.png',
-      league: 'Premier League',
-    },
-    {
       id: 'barcelona',
       name: 'FC Barcelona',
       logo: '/src/assets/images/teams/barca.png',
       league: 'La Liga',
+    },
+    {
+      id: 'arsenal',
+      name: 'Arsenal FC',
+      logo: '/src/assets/images/teams/arsenal.png',
+      league: 'Premier League',
     },
     {
       id: 'realmadrid',
@@ -56,19 +57,22 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
 
+  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [nonBarcaTeam, setNonBarcaTeam] = useState<string | null>(null);
+
   const filteredTeams = teams.filter(team =>
     team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     team.league.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // const handleSelect = (teamId: string) => {
-  //   setSelectedTeamId(teamId);
-  //   onSelectTeam(teamId);
-  // };
-
   const navigate = useNavigate();
 
-  const handleSelect = (id: string | number) => {
+  const handleSelect = (teamId: string) => {
+    if (teamId !== 'barcelona') {
+      setNonBarcaTeam(teamId);
+      setShowComingSoon(true);
+      return;
+    }
     navigate(`/equipo/barca`);
   };
 
@@ -103,18 +107,14 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
             filteredTeams.map((team) => (
               <div
                 key={team.id}
-                className={`flex flex-col items-center justify-center p-4 rounded-lg cursor-pointer transition-all duration-300
-                            ${selectedTeamId === team.id ? 'bg-green-500 transform scale-105 border-2 border-lime-400' : 'bg-gray-800 hover:bg-gray-700 border border-transparent hover:border-lime-400'}
-                            shadow-lg`}
-                onClick={() => handleSelect(team.id)}
+                className="flex flex-col items-center justify-center p-4 rounded-lg"
               >
                 <img
                   src={team.logo}
                   alt={`${team.name} logo`}
-                  className="w-20 h-20 object-contain mb-3 filter grayscale hover:grayscale-0 transition-all duration-300" // Example: grayscale for unselected
+                  className="w-20 h-20 object-contain mb-3 filter grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
+                  onClick={() => handleSelect(team.id)}
                 />
-                <p className="font-semibold text-white text-lg">{team.name}</p>
-                <p className="text-gray-400 text-sm">{team.league}</p>
               </div>
             ))
           ) : (
@@ -122,22 +122,16 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
           )}
         </div>
 
-        {/* {selectedTeamId && (
-          <div className="mt-12">
-            <p className="text-white text-xl">
-              Has seleccionado: <span className="font-bold text-lime-400">
-                {teams.find(t => t.id === selectedTeamId)?.name}
-              </span>.
-              Ahora podrías navegar a sus predicciones de jugadores.
-            </p>
-            <button
-              onClick={() => alert(`Cargar predicciones para ${teams.find(t => t.id === selectedTeamId)?.name}`)}
-              className="mt-6 bg-lime-400 text-dark-blue-bg font-bold py-3 px-8 rounded-full text-lg hover:bg-green-500 transition duration-300 transform hover:scale-105"
-            >
-              Ver Predicciones de Jugadores
-            </button>
-          </div>
-        )} */}
+        {showComingSoon && nonBarcaTeam && (
+          <ComingSoonCard
+            team={nonBarcaTeam}
+            onClose={() => {
+              setShowComingSoon(false);
+              setNonBarcaTeam(null);
+            }}
+          />
+        )}
+
       </div>
     </div>
   );

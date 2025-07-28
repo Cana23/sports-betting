@@ -1,0 +1,90 @@
+.card-id567 {
+  width: 20%;
+  height: 30%;
+  background: rgb(22, 22, 22);
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 300ms ease;
+  animation: 4s thumb-thumb infinite;
+}
+
+.card-id567:hover {
+  cursor: default;
+}
+
+.bold-567 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.creator-points {
+  width: 3rem;
+  height: 3rem;
+  color: #22c55e;
+  animation: 2s spinny-token-yayyy infinite;
+}
+
+.blurry-splash {
+  position: absolute;
+  inset: 0;
+  width: 60px;
+  margin: 0 auto;
+  height: 60px;
+  border-radius: 1rem;
+  z-index: -1;
+  opacity: 70%;
+  filter: blur(15px);
+  background: linear-gradient(120deg,
+      rgba(167, 139, 250, 0.24),
+      rgba(167, 139, 250, 0.384),
+      rgba(167, 139, 250, 0.226));
+}
+
+.prompt-id567 {
+  color: rgb(173, 173, 173);
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.really-small-text {
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.5;
+  margin-top: 0.25rem;
+}
+
+.token-container {
+  margin-bottom: 0.25rem;
+}
+
+@keyframes spinny-token-yayyy {
+  0% {
+    transform: perspective(200px) rotateY(0deg);
+  }
+
+  100% {
+    transform: perspective(200px) rotateY(360deg);
+  }
+}
+
+@keyframes thumb-thumb {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
