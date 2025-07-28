@@ -55,7 +55,6 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
   ]);
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
 
   const [showComingSoon, setShowComingSoon] = useState(false);
   const [nonBarcaTeam, setNonBarcaTeam] = useState<string | null>(null);
@@ -86,10 +85,14 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
     <div className="pb-8 px-4 md:px-16 bg-dark-blue-bg">
       <div className="container mx-auto text-center">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-          Selecciona tu <span className="bg-gradient-to-r from-green-400 to-cyan-500 text-transparent bg-clip-text">Equipo Favorito</span>
+          Selecciona tu{" "}
+          <span className="bg-gradient-to-r from-green-400 to-cyan-500 text-transparent bg-clip-text">
+            Equipo Favorito
+          </span>
         </h2>
         <p className="text-lg text-white text-opacity-80 mb-12 max-w-2xl mx-auto">
-          Elige un equipo para ver predicciones detalladas de sus jugadores y próximos partidos.
+          Elige un equipo para ver predicciones detalladas de sus jugadores y
+          próximos partidos.
         </p>
 
         <div className="mb-8">
@@ -104,21 +107,38 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {filteredTeams.length > 0 ? (
-            filteredTeams.map((team) => (
-              <div
-                key={team.id}
-                className="flex flex-col items-center justify-center p-4 rounded-lg"
-              >
-                <img
-                  src={team.logo}
-                  alt={`${team.name} logo`}
-                  className="w-20 h-20 object-contain mb-3 filter grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
-                  onClick={() => handleSelect(team.id)}
-                />
-              </div>
-            ))
+            filteredTeams.map((team) => {
+              const isAvailable = team.id === "barcelona";
+              return (
+                <div
+                  key={team.id}
+                  className="relative flex flex-col items-center justify-center p-4 rounded-lg"
+                >
+                  <img
+                    src={team.logo}
+                    alt={`${team.name} logo`}
+                    className={`w-20 h-20 object-contain mb-3 filter transition-all duration-300 cursor-pointer
+              ${
+                isAvailable
+                  ? "grayscale hover:grayscale-0"
+                  : "opacity-50 grayscale cursor-not-allowed"
+              }
+            `}
+                    onClick={() => isAvailable && handleSelect(team.id)}
+                    title={isAvailable ? "" : "Próximamente"}
+                  />
+                  {!isAvailable && (
+                    <span className="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded shadow text-gray-900">
+                      Próximamente
+                    </span>
+                  )}
+                </div>
+              );
+            })
           ) : (
-            <p className="col-span-full text-white text-xl">No se encontraron equipos que coincidan con "{searchTerm}".</p>
+            <p className="col-span-full text-white text-xl">
+              No se encontraron equipos que coincidan con "{searchTerm}".
+            </p>
           )}
         </div>
 
@@ -131,7 +151,6 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
             }}
           />
         )}
-
       </div>
     </div>
   );

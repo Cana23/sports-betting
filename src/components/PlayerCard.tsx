@@ -4,7 +4,7 @@ interface PlayerCardProps {
   name: string;
   age: number;
   position: string;
-  countryFlag: string;
+  countryFlag?: string;
   playerImage: string;
 }
 
