@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { usePeriod } from '../hooks/usePeriod';
 import axios from 'axios';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from "recharts";
 
@@ -12,6 +13,8 @@ interface PlayerStatsProps {
 }
 
 const PlayerStats = ({ player, onFetchError }: PlayerStatsProps) => {
+  const { period } = usePeriod();
+
   const [predictedStats, setPredictedStats] = useState<Data | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,7 +37,7 @@ const PlayerStats = ({ player, onFetchError }: PlayerStatsProps) => {
       try {
         // console.log(player);
         
-        const apiUrl = `http://127.0.0.1:8000/predict/player/${player.id}/35`;
+        const apiUrl = `http://127.0.0.1:8000/predict/player/${player.id}/${period}`;
         const response: ApiResponse = await axios.post(apiUrl);
         setPredictedStats(response.data);
         console.log('Estadísticas de pase predichas:', response.data);
