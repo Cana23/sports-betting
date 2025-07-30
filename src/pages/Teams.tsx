@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import ComingSoonCard from '../components/ComingSoonCard/ComingSoonCard';
 
-interface Team {
-  id: string;
-  name: string;
-  logo: string;
-  league: string;
-}
+import type { Team } from '../interfaces/team';
 
 interface TeamSelectionProps {
   onSelectTeam: (teamId: string) => void;
 }
 
-const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
-  const [teams, setTeams] = useState<Team[]>([
+const TeamSelection: React.FC<TeamSelectionProps> = () => {
+  const teams: Team[] = [
     {
       id: 'barcelona',
       name: 'FC Barcelona',
@@ -52,7 +46,7 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
       logo: '/src/assets/images/teams/liver.png',
       league: 'Premier League',
     }
-  ]);
+  ];
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -63,17 +57,6 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
     team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     team.league.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const navigate = useNavigate();
-
-  const handleSelect = (teamId: string) => {
-    if (teamId !== 'barcelona') {
-      setNonBarcaTeam(teamId);
-      setShowComingSoon(true);
-      return;
-    }
-    navigate(`/equipo/barca`);
-  };
 
   const { pathname } = useLocation();
 
@@ -114,19 +97,23 @@ const TeamSelection: React.FC<TeamSelectionProps> = ({ onSelectTeam }) => {
                   key={team.id}
                   className="relative flex flex-col items-center justify-center p-4 rounded-lg"
                 >
-                  <img
-                    src={team.logo}
-                    alt={`${team.name} logo`}
-                    className={`w-20 h-20 object-contain mb-3 filter transition-all duration-300 cursor-pointer
-              ${
-                isAvailable
-                  ? "grayscale hover:grayscale-0"
-                  : "opacity-50 grayscale cursor-not-allowed"
-              }
-            `}
-                    onClick={() => isAvailable && handleSelect(team.id)}
-                    title={isAvailable ? "" : "Próximamente"}
-                  />
+                  {isAvailable ? (
+                    <a href="/team/barca">
+                      <img
+                        src={team.logo}
+                        alt={`${team.name} logo`}
+                        className="w-20 h-20 object-contain mb-3 filter transition-all duration-300 cursor-pointer grayscale hover:grayscale-0"
+                        title={isAvailable ? "" : "Próximamente"}
+                      />
+                    </a>
+                  ) : (
+                    <img
+                      src={team.logo}
+                      alt={`${team.name} logo`}
+                      className="w-20 h-20 object-contain mb-3 filter transition-all duration-300 cursor-pointer opacity-50 grayscale cursor-not-allowed"
+                      title={isAvailable ? "" : "Próximamente"}
+                    />
+                  )}
                   {!isAvailable && (
                     <span className="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded shadow text-gray-900">
                       Próximamente

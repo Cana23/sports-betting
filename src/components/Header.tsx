@@ -15,10 +15,13 @@ export default function Header() {
   return (
     <>
       <header className="pt-4 px-4 md:px-10">
-        <div className="bg-white/10 backdrop-blur rounded-full border border-white/10 shadow-md flex justify-between items-center py-3 px-5 md:px-8 max-w-6xl mx-auto">
-          <Link to="/">
-            <img src="/src/assets/logo.png" alt="" className="w-[14%] md:w-[20%] lg:w-[8%] object-cover cursor-pointer" />
-          </Link>
+        <div className="bg-white/10 backdrop-blur rounded-full border border-white/10 shadow-md flex justify-between items-center py-1 px-5 md:px-8 max-w-6xl mx-auto">
+          <a href="/">
+            <div className="flex items-center gap-2 cursor-pointer">
+              <img src="/src/assets/logo.png" alt="" className="w-[14%] md:w-[20%] lg:w-[8%] object-cover" />
+            <p className="text-white font-semibold">Sports Betting</p>
+            </div>
+          </a>
 
           {/* Desktop menu */}
           <nav className="hidden md:flex gap-6 items-center text-sm font-medium text-white">
@@ -32,12 +35,15 @@ export default function Header() {
               </a>
             ))}
 
-            <Link to="/teams">
+            {/* <Link to="/teams"> */}
+            <a href="/teams">
               <button
                 className="bg-gradient-to-r from-lime-400 to-green-500 text-black font-semibold rounded-full px-5 py-2 hover:opacity-90 transition cursor-pointer"
               >
                 Apostar
-              </button></Link>
+              </button>
+            </a>
+              {/* </Link> */}
           </nav>
 
           <button
@@ -65,12 +71,15 @@ export default function Header() {
               </a>
             ))}
 
-            <Link to="/teams">
+            {/* <Link to="/teams"> */}
+            <a href="/teams">
               <button
                 className="bg-gradient-to-r from-lime-400 to-green-500 text-black font-semibold rounded-full px-5 py-2 hover:opacity-90 transition cursor-pointer"
               >
                 Apostar
-              </button></Link>
+              </button>
+            </a>
+            {/* </Link> */}
           </div>
         )}
       </header>

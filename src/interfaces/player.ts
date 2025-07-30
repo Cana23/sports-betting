@@ -1,10 +1,11 @@
+import type { Positions } from "./positions";
+
 export interface Player {
-  number: number;
+  id: number;
   name: string;
-  position: string;
+  position: Positions;
   age: number;
   image: string;
   top?: string;
   left?: string;
-  countryFlag?: string;
 }
