@@ -5,7 +5,7 @@ import { PeriodContext } from '../context/PeriodContext';
 export const usePeriod = (): PeriodContextType => {
   const context = useContext(PeriodContext);
   if (context === undefined) {
-    throw new Error('useTheme debe ser usado dentro de un ThemeProvider');
+    throw new Error('usePeriod debe ser usado dentro de un PeriodProvider');
   }
   return context;
 };
