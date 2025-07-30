@@ -22,7 +22,7 @@ const Features: React.FC = () => {
           Sports betting es una plataforma amigable, descentralizada y impulsada por la comunidad para predicciones deportivas basadas en estadísticas detalladas de los jugadores.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <FeatureCard
             title="Centrado en el Jugador"
             description="Enfocados en el rendimiento individual y las estadísticas detalladas de cada jugador."
@@ -44,6 +44,14 @@ const Features: React.FC = () => {
             iconSrc="/src/assets/images/features/4.png"
           />
         </div>
+
+        <a href="/teams">
+              <button
+                className="bg-gradient-to-r from-lime-400 to-green-500 text-black font-semibold rounded-full px-5 py-2 hover:opacity-90 transition cursor-pointer"
+              >
+                Apuesta por tu Jugador Favorito
+              </button>
+            </a>
       </div>
     </div>
   );

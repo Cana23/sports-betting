@@ -16,9 +16,12 @@ export default function Header() {
     <>
       <header className="pt-4 px-4 md:px-10">
         <div className="bg-white/10 backdrop-blur rounded-full border border-white/10 shadow-md flex justify-between items-center py-3 px-5 md:px-8 max-w-6xl mx-auto">
-          <Link to="/">
-            <img src="/src/assets/logo.png" alt="" className="w-[14%] md:w-[20%] lg:w-[8%] object-cover cursor-pointer" />
-          </Link>
+          <a href="/">
+            <div className="flex items-center gap-2 cursor-pointer">
+              <img src="/src/assets/logo.png" alt="" className="w-[14%] md:w-[20%] lg:w-[8%] object-cover" />
+            <p className="text-white font-semibold">Sports Betting</p>
+            </div>
+          </a>
 
           {/* Desktop menu */}
           <nav className="hidden md:flex gap-6 items-center text-sm font-medium text-white">
