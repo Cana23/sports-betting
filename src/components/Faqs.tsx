@@ -32,14 +32,14 @@ const FAQ: React.FC = () => {
       question: "¿Quiero hacer predicciones en sports betting. ¿Qué necesito hacer?",
       answer: "Podrás navegar por los próximos partidos, seleccionar jugadores, y elegir el tipo de estadística sobre la que quieres predecir (goles, asistencias, tiros a puerta, etc.).",
     },
-    {
-      question: "¿Con qué rapidez recibo mis ganancias una vez que acierto una predicción?",
-      answer: "Las ganancias se procesan automáticamente una vez que el evento del partido finaliza y las estadísticas de los jugadores son verificadas. Gracias a nuestra tecnología descentralizada, los pagos son casi instantáneos una vez que se cumplen las condiciones.",
-    },
-    {
-      question: "¿Cuáles son las comisiones que tengo que pagar?",
-      answer: "sports betting opera con comisiones mínimas. Nuestra estructura descentralizada nos permite reducir significativamente los costes asociados con las operaciones tradicionales. Los detalles exactos de las comisiones se muestran claramente antes de confirmar cualquier predicción.",
-    },
+    // {
+    //   question: "¿Con qué rapidez recibo mis ganancias una vez que acierto una predicción?",
+    //   answer: "Las ganancias se procesan automáticamente una vez que el evento del partido finaliza y las estadísticas de los jugadores son verificadas. Gracias a nuestra tecnología descentralizada, los pagos son casi instantáneos una vez que se cumplen las condiciones.",
+    // },
+    // {
+    //   question: "¿Cuáles son las comisiones que tengo que pagar?",
+    //   answer: "sports betting opera con comisiones mínimas. Nuestra estructura descentralizada nos permite reducir significativamente los costes asociados con las operaciones tradicionales. Los detalles exactos de las comisiones se muestran claramente antes de confirmar cualquier predicción.",
+    // },
     {
       question: "¿Puedo establecer las estadísticas para cualquier predicción que quiera?",
       answer: "Actualmente, ofrecemos una amplia gama de opciones de predicción basadas en las estadísticas de los jugadores más relevantes (goles, asistencias, tarjetas, etc.). Estamos trabajando para permitir que los usuarios propongan y creen sus propias predicciones personalizadas en el futuro, siempre que haya datos fiables disponibles para verificarlas.",

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { usePeriod } from "../../hooks/usePeriod";
 
 interface Message {
   role: "user" | "bot";
@@ -18,6 +19,7 @@ const ChatbotWindow = ({ onClose, messages, setMessages }: Props) => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const delayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const { period } = usePeriod(); 
 
   // Guardar mensajes cada vez que cambien
   useEffect(() => {
@@ -47,7 +49,7 @@ const ChatbotWindow = ({ onClose, messages, setMessages }: Props) => {
       const res = await fetch("http://localhost:8000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: input }),
+        body: JSON.stringify({ prompt: input, jornada: period }),
       });
 
       const data = await res.json();
