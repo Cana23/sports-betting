@@ -258,22 +258,22 @@ const PlayerStats = ({ player, onFetchError }: PlayerStatsProps) => {
         <div>
           <h3 className="text-lime-400 font-semibold mb-1">Tiros</h3>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Goles anotados" value={editMode ? (editableStats?.tiro?.Gls?.predicted ?? 0) : (statsToDisplay.tiro.Gls.predicted ?? 0)} onChange={(v) => handleChange('tiro', 'Gls', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay.tiro.Gls.accuracy ? statsToDisplay.tiro.Gls.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Disparos totales" value={editMode ? (editableStats?.tiro?.Sh?.predicted ?? 0) : (statsToDisplay.tiro.Sh.predicted ?? 0)} onChange={(v) => handleChange('tiro', 'Sh', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay.tiro.Sh.accuracy ? statsToDisplay.tiro.Sh.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Disparos a puerta" value={editMode ? (editableStats?.tiro?.SoT?.predicted ?? 0) : (statsToDisplay.tiro.SoT.predicted ?? 0)} onChange={(v) => handleChange('tiro', 'SoT', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay.tiro.SoT.accuracy ? statsToDisplay.tiro.SoT.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Goles esperados" value={editMode ? (editableStats?.tiro?.xG?.predicted ?? 0) : (statsToDisplay.tiro.xG.predicted ?? 0)} onChange={(v) => handleChange('tiro', 'xG', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay.tiro.xG.accuracy ? statsToDisplay.tiro.xG.accuracy : 0}%</h3> */}
           </div>
@@ -284,22 +284,22 @@ const PlayerStats = ({ player, onFetchError }: PlayerStatsProps) => {
         <div>
           <h3 className="text-lime-400 font-semibold mb-1">Pases</h3>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Pases intentados" value={editMode ? (editableStats?.pase?.Att?.predicted ?? 0) : (statsToDisplay?.pase.Att.predicted ?? 0)} onChange={(v) => handleChange('pase', 'Att', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.pase.Att.accuracy ? statsToDisplay.pase.Att.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Pases completados" value={editMode ? (editableStats?.pase?.Cmp?.predicted ?? 0) : (statsToDisplay?.pase.Cmp.predicted ?? 0)} onChange={(v) => handleChange('pase', 'Cmp', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.pase.Cmp.accuracy ? statsToDisplay.pase.Cmp.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Precisión de pase" value={editMode ? (editableStats?.pase?.['Cmp%']?.predicted ?? 0) : (statsToDisplay?.pase['Cmp%'].predicted ?? 0)} onChange={(v) => handleChange('pase', 'Cmp%', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.pase['Cmp%'].accuracy ? statsToDisplay.pase['Cmp%'].accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Pases progesivos" value={editMode ? (editableStats?.pase?.PrgP?.predicted ?? 0) : (statsToDisplay?.pase.PrgP.predicted ?? 0)} onChange={(v) => handleChange('pase', 'PrgP', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.pase.PrgP.accuracy ? statsToDisplay.pase.PrgP.accuracy : 0}%</h3> */}
           </div>
@@ -310,17 +310,17 @@ const PlayerStats = ({ player, onFetchError }: PlayerStatsProps) => {
         <div>
           <h3 className="text-lime-400 font-semibold mb-1">Defensa</h3>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Bloqueos defensivos" value={editMode ? (editableStats?.defensa?.Blocks?.predicted ?? 0) : (statsToDisplay?.defensa.Blocks.predicted ?? 0)} onChange={(v) => handleChange('defensa', 'Blocks', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.defensa.Blocks.accuracy ? statsToDisplay.defensa.Blocks.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Interceptiones" value={editMode ? (editableStats?.defensa?.Int?.predicted ?? 0) : (statsToDisplay?.defensa.Int.predicted ?? 0)} onChange={(v) => handleChange('defensa', 'Int', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.defensa.Int.accuracy ? statsToDisplay.defensa.Int.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Entradas realizadas" value={editMode ? (editableStats?.defensa?.Tkl?.predicted ?? 0) : (statsToDisplay?.defensa.Tkl.predicted ?? 0)} onChange={(v) => handleChange('defensa', 'Tkl', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.defensa.Tkl.accuracy ? statsToDisplay.defensa.Tkl.accuracy : 0}%</h3> */}
           </div>
@@ -331,22 +331,22 @@ const PlayerStats = ({ player, onFetchError }: PlayerStatsProps) => {
         <div>
           <h3 className="text-lime-400 font-semibold mb-1">Regate</h3>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Regates intentados" value={editMode ? (editableStats?.regate?.['Att.1']?.predicted ?? 0) : (statsToDisplay?.regate['Att.1'].predicted ?? 0)} onChange={(v) => handleChange('regate', 'Att.1', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.regate['Att.1'].accuracy ? statsToDisplay.regate['Att.1'].accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Conduc de balón" value={editMode ? (editableStats?.regate?.Carries?.predicted ?? 0) : (statsToDisplay?.regate.Carries.predicted ?? 0)} onChange={(v) => handleChange('regate', 'Carries', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.regate.Carries.accuracy ? statsToDisplay.regate.Carries.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Conduc progresivas" value={editMode ? (editableStats?.regate?.PrgC?.predicted ?? 0) : (statsToDisplay?.regate.PrgC.predicted ?? 0)} onChange={(v) => handleChange('regate', 'PrgC', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.regate.PrgC.accuracy ? statsToDisplay.regate.PrgC.accuracy : 0}%</h3> */}
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Stat label="Regates completados" value={editMode ? (editableStats?.regate?.Succ?.predicted ?? 0) : (statsToDisplay?.regate.Succ.predicted ?? 0)} onChange={(v) => handleChange('regate', 'Succ', v)} editMode={editMode} />
             {/* <h3 className="text-lime-400 font-semibold mb-1">{statsToDisplay?.regate.Succ.accuracy ? statsToDisplay.regate.Succ.accuracy : 0}%</h3> */}
           </div>
