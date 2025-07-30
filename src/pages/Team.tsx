@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ArrowRightLeft } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
 
 import PlayerCard from '../components/PlayerCard';
 import PlayerStats from '../components/PlayerStats'
@@ -90,8 +91,10 @@ export default function Team() {
   };
 
   const handlePlayerStatsError = () => {
-    alert('Fallo al cargar las estadísticas del jugador. Inténtalo de nuevo.');
-    setSelectedPlayer(null); // Oculta el componente de estadísticas en caso de error
+    const notify = () => toast.warn("Fallo al cargar las estadísticas del jugador. Inténtalo de nuevo.");
+    notify();
+    // alert('Fallo al cargar las estadísticas del jugador. Inténtalo de nuevo.');
+    setSelectedPlayer(null);
   };
 
   return (
@@ -103,13 +106,13 @@ export default function Team() {
         </span>
       </h1>
 
-      <div className="w-full flex flex-wrap justify-center gap-8 md:gap-0">
+      <div className="w-full flex flex-wrap items-center justify-center align-center gap-8">
         <div className="bg-[url('/src/assets/images/campo.jpg')] bg-contain bg-no-repeat bg-center rounded-xl shadow-xl flex flex-col justify-between">
           {/* Defensas */}
           <div className="flex justify-center gap-8 mb-8">
             {defenders.map((player, idx) => (
               <div key={idx} className="flex flex-col items-center mx-2">
-                
+
                 <div className="relative bg-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-center border-2 border-blue-800 cursor-pointer">
 
                   <img
@@ -144,7 +147,7 @@ export default function Team() {
           <div className="flex justify-center gap-8 mb-8">
             {midfielders.map((player, idx) => (
               <div key={idx} className="flex flex-col items-center mx-2">
-                
+
                 <div className="relative bg-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-center border-2 border-blue-800 cursor-pointer">
 
                   <img
@@ -178,7 +181,7 @@ export default function Team() {
           <div className="flex justify-center gap-8 mb-8">
             {forwards.map((player, idx) => (
               <div key={idx} className="flex flex-col items-center mx-2">
-                
+
                 <div className="relative bg-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-center border-2 border-blue-800 cursor-pointer">
 
                   <img
@@ -216,6 +219,7 @@ export default function Team() {
             onFetchError={handlePlayerStatsError}
           />
         </div>
+
       </div>
 
       {playerToSwap && (
@@ -227,7 +231,7 @@ export default function Team() {
             </span>
           </h1>
 
-          <div className="flex flex-wrap gap-4 mt-6">
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
             {substitutes.map((sub, index) => (
               <div key={index} onClick={() => handleSubstitution(sub, index)}>
                 <a href="#team">
@@ -243,6 +247,8 @@ export default function Team() {
           </div>
         </div>
       )}
+
+      <ToastContainer />
 
       {/* <PlayerStatsModal
         player={showStatsPlayer}
