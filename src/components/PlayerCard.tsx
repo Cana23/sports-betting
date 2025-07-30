@@ -1,22 +1,23 @@
 import React from "react";
+import type { Player } from "../interfaces/Player";
 
-interface PlayerCardProps {
-  name: string;
-  age: number;
-  position: string;
-  playerImage: string;
-}
+// interface PlayerCardProps {
+//   name: string;
+//   age: number;
+//   position: string;
+//   playerImage: string;
+// }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({
+const PlayerCard: React.FC<Player> = ({
   name,
   age,
   position,
-  playerImage,
+  image,
 }) => {
   return (
     <div className="relative w-55 h-[300px] bg-gradient-to-b from-[#1c1c1c] to-black text-white rounded-2xl overflow-hidden shadow-xl mx-auto cursor-pointer">
       <img
-        src={playerImage}
+        src={image}
         alt={`${name}`}
         className="absolute top-10 left-1/2 transform -translate-x-1/2 w-40 h-48 object-cover z-10 rounded-2xl"
       />

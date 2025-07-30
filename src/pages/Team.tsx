@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ArrowRightLeft } from 'lucide-react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,35 +7,34 @@ import PlayerCard from '../components/PlayerCard';
 import PlayerStats from '../components/PlayerStats'
 
 import type { Player } from "../interfaces/Player";
-import type { Substitute } from "../interfaces/Substitute";
+import { Positions } from '../interfaces/positions';
 
-const playersInit = [
-  { id: 12, name: "Andreas Christensen", position: "CB", age: 24, top: "65%", left: "65%", image: "https://img.a.transfermarkt.technology/portrait/big/196948-1668183241.jpg?lm=1" },
-  { id: 13, name: "Jules Koundé", position: "RB", age: 24, top: "65%", left: "85%", image: "https://img.a.transfermarkt.technology/portrait/big/411975-1702502639.jpg?lm=1" },
-  { id: 3, name: "Frenkie de Jong", position: "CM", age: 24, top: "45%", left: "30%", image: "https://img.a.transfermarkt.technology/portrait/big/326330-1746041680.jpg?lm=1" },
-  { id: 2, name: "Gavi", position: "CM", age: 24, top: "45%", left: "50%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXJFSeYHzA9RdJUjwxsnSH97yYrCDJrL0uQg&s" },
-  { id: 17, name: "Fermin López", position: "CAM", age: 22, top: "45%", left: "70%", image: "https://img.a.transfermarkt.technology/portrait/big/636703-1698086824.jpg?lm=1" },
-  { id: 6, name: "Raphinha", position: "LW", age: 24, top: "25%", left: "20%", image: "https://img.a.transfermarkt.technology/portrait/big/411295-1729754479.png?lm=1" },
-  { id: 4, name: "Robert Lewandowski", position: "ST", age: 24, top: "20%", left: "50%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvI3M6gk4XcYneJDlRzT56Tj_wKyfPGFkXzg&s" },
-  { id: 5, name: "Ferran Torres", position: "RW", age: 24, top: "25%", left: "80%", image: "https://img.a.transfermarkt.technology/portrait/big/398184-1699383547.jpg?lm=1" }
+const playersInit: Player[] = [
+  { id: 4, name: "Robert Lewandowski", position: Positions.ST, age: 24, top: "15%", left: "50%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvI3M6gk4XcYneJDlRzT56Tj_wKyfPGFkXzg&s" },
+  { id: 6, name: "Raphinha", position: Positions.ST, age: 24, top: "28%", left: "20%", image: "https://img.a.transfermarkt.technology/portrait/big/411295-1729754479.png?lm=1" },
+  { id: 19, name: "Dani Olmo", position: Positions.CAM, age: 27, top: "28%", left: "50%", image: "https://img.a.transfermarkt.technology/portrait/big/293385-1711546268.jpg?lm=1" },
+  { id: 7, name: "Lamine Yamal", position: Positions.ST, age: 18, top: "28%", left: "80%", image: "https://assets.goal.com/images/v3/blt48b5f89ed89139d8/Yamal.jpg?auto=webp&format=pjpg&width=3840&quality=60" },
+  { id: 1, name: "Pedri", position: Positions.CAM, age: 23, top: "45%", left: "35%", image: "https://www.fcbarcelona.com/photo-resources/2025/07/09/16c3e62d-1a5a-4e10-a964-560eacb6885a/08-Pedri.jpg?width=1200&height=750" },
+  { id: 3, name: "Frenkie de Jong", position: Positions.CAM, age: 24, top: "45%", left: "65%", image: "https://img.a.transfermarkt.technology/portrait/big/326330-1746041680.jpg?lm=1" },
+  { id: 9, name: "Alejandro Balde", position: Positions.LB, age: 22, top: "65%", left: "15%", image: "https://img.a.transfermarkt.technology/portrait/big/636688-1662836200.jpg?lm=1" },
+  { id: 11, name: "Iñigo Martínez", position: Positions.LB, age: 34, top: "65%", left: "35%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbd5bj6CC4BvYaLuDRffP6myCwZmPqmNBk_g&s" },
+  { id: 8, name: "Pau Cubarsí", position: Positions.LB, age: 18, top: "65%", left: "65%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsYNiIzRXdwrjjYn-Y8gQVHeWKb6rYByPlxw&s" },
+  { id: 14, name: "Eric García", position: Positions.LB, age: 24, top: "65%", left: "85%", image: "https://img.a.transfermarkt.technology/portrait/big/466794-1693604801.jpg?lm=1" }
 ];
 
-const substitutesInit = [
-  { id: 19, name: "Dani Olmo", position: "CAM", age: 27, image: "https://img.a.transfermarkt.technology/portrait/big/293385-1711546268.jpg?lm=1" },
-  { id: 18, name: "Marc Casado", position: "CAM", age: 21, image: "https://www.ecured.cu/images/thumb/0/0c/Marc_Casad%C3%B3.jpg/260px-Marc_Casad%C3%B3.jpg" },
-  { id: 16, name: "Gerard Martín", position: "RB", age: 23, image: "https://img.a.transfermarkt.technology/portrait/big/705395-1730119053.jpg?lm=1" },
-  { id: 15, name: "Héctor Fort", position: "LB", age: 18, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNrfp13qofwsTeoPMBbqWbwPxfZHix4M1p-g&s" },
-  { id: 14, name: "Eric García", position: "RB", age: 24, image: "https://img.a.transfermarkt.technology/portrait/big/466794-1693604801.jpg?lm=1" },
-  { id: 11, name: "Iñigo Martínez", position: "LB", age: 34, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbd5bj6CC4BvYaLuDRffP6myCwZmPqmNBk_g&s" },
-  { id: 10, name: "Ronald Araújo", position: "RB", age: 26, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFO3E0CLDqhAI8QTvofGKAZgarvNF1QVaaPw&s" },
-  { id: 9, name: "Alejandro Balde", position: "LB", age: 22, image: "https://img.a.transfermarkt.technology/portrait/big/636688-1662836200.jpg?lm=1" },
-  { id: 8, name: "Pau Cubarsí", position: "CB", age: 18, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsYNiIzRXdwrjjYn-Y8gQVHeWKb6rYByPlxw&s" },
-  { id: 7, name: "Lamine Yamal", position: "ST", age: 18, image: "https://assets.goal.com/images/v3/blt48b5f89ed89139d8/Yamal.jpg?auto=webp&format=pjpg&width=3840&quality=60" },
-  { id: 1, name: "Pedri", position: "CM", age: 23, image: "https://www.fcbarcelona.com/photo-resources/2025/07/09/16c3e62d-1a5a-4e10-a964-560eacb6885a/08-Pedri.jpg?width=1200&height=750" },
+const substitutesInit: Player[] = [
+  { id: 12, name: "Andreas Christensen", position: Positions.LB, age: 24, image: "https://img.a.transfermarkt.technology/portrait/big/196948-1668183241.jpg?lm=1" },
+  { id: 13, name: "Jules Koundé", position: Positions.LB, age: 24, image: "https://img.a.transfermarkt.technology/portrait/big/411975-1702502639.jpg?lm=1" },
+  { id: 2, name: "Gavi", position: Positions.CAM, age: 24, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXJFSeYHzA9RdJUjwxsnSH97yYrCDJrL0uQg&s" },
+  { id: 17, name: "Fermin López", position: Positions.CAM, age: 22, image: "https://img.a.transfermarkt.technology/portrait/big/636703-1698086824.jpg?lm=1" },
+  { id: 18, name: "Marc Casado", position: Positions.CAM, age: 21, image: "https://www.ecured.cu/images/thumb/0/0c/Marc_Casad%C3%B3.jpg/260px-Marc_Casad%C3%B3.jpg" },
+  { id: 16, name: "Gerard Martín", position: Positions.LB, age: 23, image: "https://img.a.transfermarkt.technology/portrait/big/705395-1730119053.jpg?lm=1" },
+  { id: 15, name: "Héctor Fort", position: Positions.LB, age: 18, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNrfp13qofwsTeoPMBbqWbwPxfZHix4M1p-g&s" },
+  { id: 5, name: "Ferran Torres", position: Positions.ST, age: 24, image: "https://img.a.transfermarkt.technology/portrait/big/398184-1699383547.jpg?lm=1" },
+  { id: 10, name: "Ronald Araújo", position: Positions.LB, age: 26, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFO3E0CLDqhAI8QTvofGKAZgarvNF1QVaaPw&s" }
 ];
 
 export default function Team() {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -44,56 +42,74 @@ export default function Team() {
   }, [pathname]);
 
   const [playerToSwap, setPlayerToSwap] = useState<Player | null>(null);
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
-
-  // const [showStatsPlayer, setShowStatsPlayer] = useState<Player | null>(null);
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
 
   const [players, setPlayers] = useState<Player[]>(playersInit);
-  const [substitutes, setSubstitutes] = useState<Substitute[]>(substitutesInit);
+  const [substitutes, setSubstitutes] = useState<Player[]>(substitutesInit);
 
-  const gk = players.filter((p) => p.position === "GK");
-  const defenders = players.filter((p) =>
+  const filteredSubstitutes = playerToSwap
+    ? substitutes.filter(sub => sub.position === playerToSwap.position)
+    : [];
+
+  const defenders: Player[] = players.filter((p) =>
     ["LB", "CB", "RB"].includes(p.position)
   );
-  const midfielders = players.filter((p) =>
+  const midfielders: Player[] = players.filter((p) =>
     ["CM", "CAM", "CDM"].includes(p.position)
   );
-  const forwards = players.filter((p) =>
+  const forwards: Player[] = players.filter((p) =>
     ["LW", "RW", "ST"].includes(p.position)
   );
 
   function handleSubstitution(sub: Player, subIndex: number) {
     if (!playerToSwap) return;
 
-    const playerIndex = players.findIndex(p => p.name === playerToSwap.name);
-    if (playerIndex === -1) return;
+    const playerInFieldIndex = players.findIndex(p => p.id === playerToSwap.id); // Usar ID para mayor seguridad
+    if (playerInFieldIndex === -1) return;
 
-    const updatedPlayers = [...players];
-    const updatedSubstitutes = [...substitutes];
+    const newPlayers = [...players];
+    const newSubstitutes = [...substitutes];
 
-    const { top, left } = updatedPlayers[playerIndex];
+    const playerGoingToBench = newPlayers[playerInFieldIndex];
 
-    updatedPlayers[playerIndex] = {
+    newPlayers[playerInFieldIndex] = {
       ...sub,
-      top,
-      left
+      top: playerGoingToBench.top,
+      left: playerGoingToBench.left
     };
 
-    updatedSubstitutes[subIndex] = playerToSwap;
+    const subGoingToFieldCurrentIndex = newSubstitutes.findIndex(s => s.id === sub.id);
 
-    setPlayers(updatedPlayers);
-    setSubstitutes(updatedSubstitutes);
+    if (subGoingToFieldCurrentIndex !== -1) {
+      newSubstitutes[subGoingToFieldCurrentIndex] = {
+        ...playerGoingToBench,
+        top: undefined,
+        left: undefined
+      };
+    } else {
+      newSubstitutes.push({
+        ...playerGoingToBench,
+        top: undefined,
+        left: undefined
+      });
+    }
+
+    setPlayers(newPlayers);
+    setSubstitutes(newSubstitutes);
     setPlayerToSwap(null);
+    setSelectedPlayer(null);
+
+    const notify = () => toast.success("Jugador cambiado con éxito.");
+    notify();
   }
 
-  const handlePlayerClick = (playerObject) => { // Ahora recibe el objeto completo del jugador
+  const handlePlayerClick = (playerObject: Player) => {
     setSelectedPlayer(playerObject);
   };
 
   const handlePlayerStatsError = () => {
     const notify = () => toast.warn("Fallo al cargar las estadísticas del jugador. Inténtalo de nuevo.");
     notify();
-    // alert('Fallo al cargar las estadísticas del jugador. Inténtalo de nuevo.');
     setSelectedPlayer(null);
   };
 
@@ -106,12 +122,12 @@ export default function Team() {
         </span>
       </h1>
 
-      <div className="w-full flex flex-wrap items-center justify-center align-center gap-8">
-        <div className="bg-[url('/src/assets/images/campo.jpg')] bg-contain bg-no-repeat bg-center rounded-xl shadow-xl flex flex-col justify-between">
+      <div className="w-full flex flex-wrap items-center justify-center align-center gap-12">
+        <div className="min-h-[500px] bg-[url('/src/assets/images/campo.jpg')] bg-cover bg-no-repeat bg-center rounded-xl shadow-xl flex flex-col justify-between">
           {/* Defensas */}
-          <div className="flex justify-center gap-8 mb-8">
+          <div className="flex justify-center gap-8 m-auto mx-4">
             {defenders.map((player, idx) => (
-              <div key={idx} className="flex flex-col items-center mx-2">
+              <div key={idx} className="flex flex-col items-center">
 
                 <div className="relative bg-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-center border-2 border-blue-800 cursor-pointer">
 
@@ -144,9 +160,9 @@ export default function Team() {
           </div>
 
           {/* Mediocampistas */}
-          <div className="flex justify-center gap-8 mb-8">
+          <div className="flex justify-center gap-8 m-auto">
             {midfielders.map((player, idx) => (
-              <div key={idx} className="flex flex-col items-center mx-2">
+              <div key={idx} className="flex flex-col items-center">
 
                 <div className="relative bg-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-center border-2 border-blue-800 cursor-pointer">
 
@@ -178,9 +194,9 @@ export default function Team() {
             ))}
           </div>
           {/* Delanteros */}
-          <div className="flex justify-center gap-8 mb-8">
+          <div className="flex justify-center gap-8 m-auto">
             {forwards.map((player, idx) => (
-              <div key={idx} className="flex flex-col items-center mx-2">
+              <div key={idx} className="flex flex-col items-center">
 
                 <div className="relative bg-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-center border-2 border-blue-800 cursor-pointer">
 
@@ -232,28 +248,29 @@ export default function Team() {
           </h1>
 
           <div className="flex flex-wrap justify-center gap-4 mt-6">
-            {substitutes.map((sub, index) => (
-              <div key={index} onClick={() => handleSubstitution(sub, index)}>
-                <a href="#team">
-                  <PlayerCard
-                    name={sub.name}
-                    age={sub.age}
-                    position={sub.position}
-                    playerImage={sub.image}
-                  />
-                </a>
-              </div>
-            ))}
+            {/* Aquí usamos filteredSubstitutes en lugar de substitutes */}
+            {filteredSubstitutes.length > 0 ? (
+              filteredSubstitutes.map((sub, index) => (
+                <div key={index} onClick={() => handleSubstitution(sub, index)}>
+                  <a href="#team">
+                    <PlayerCard
+                      id={sub.id}
+                      name={sub.name}
+                      age={sub.age}
+                      position={sub.position}
+                      image={sub.image}
+                    />
+                  </a>
+                </div>
+              ))
+            ) : (
+              <p className="text-white text-lg">No hay sustitutos disponibles para esta posición.</p>
+            )}
           </div>
         </div>
       )}
 
       <ToastContainer />
-
-      {/* <PlayerStatsModal
-        player={showStatsPlayer}
-        onClose={() => setShowStatsPlayer(null)}
-      /> */}
     </div>
   );
 }
