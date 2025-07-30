@@ -125,7 +125,7 @@ export default function Team() {
       <div className="w-full flex flex-wrap items-center justify-center align-center gap-12">
         <div className="min-h-[500px] bg-[url('/src/assets/images/campo.jpg')] bg-cover bg-no-repeat bg-center rounded-xl shadow-xl flex flex-col justify-between">
           {/* Defensas */}
-          <div className="flex justify-center gap-8 m-auto mx-4">
+          <div className="flex justify-center gap-8 m-auto mx-2">
             {defenders.map((player, idx) => (
               <div key={idx} className="flex flex-col items-center">
 
@@ -193,6 +193,7 @@ export default function Team() {
               </div>
             ))}
           </div>
+
           {/* Delanteros */}
           <div className="flex justify-center gap-8 m-auto">
             {forwards.map((player, idx) => (
