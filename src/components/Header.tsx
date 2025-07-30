@@ -32,12 +32,15 @@ export default function Header() {
               </a>
             ))}
 
-            <Link to="/teams">
+            {/* <Link to="/teams"> */}
+            <a href="/teams">
               <button
                 className="bg-gradient-to-r from-lime-400 to-green-500 text-black font-semibold rounded-full px-5 py-2 hover:opacity-90 transition cursor-pointer"
               >
                 Apostar
-              </button></Link>
+              </button>
+            </a>
+              {/* </Link> */}
           </nav>
 
           <button
@@ -65,12 +68,15 @@ export default function Header() {
               </a>
             ))}
 
-            <Link to="/teams">
+            {/* <Link to="/teams"> */}
+            <a href="/teams">
               <button
                 className="bg-gradient-to-r from-lime-400 to-green-500 text-black font-semibold rounded-full px-5 py-2 hover:opacity-90 transition cursor-pointer"
               >
                 Apostar
-              </button></Link>
+              </button>
+            </a>
+            {/* </Link> */}
           </div>
         )}
       </header>

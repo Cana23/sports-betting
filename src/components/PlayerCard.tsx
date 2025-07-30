@@ -4,7 +4,6 @@ interface PlayerCardProps {
   name: string;
   age: number;
   position: string;
-  countryFlag?: string;
   playerImage: string;
 }
 
@@ -12,7 +11,6 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   name,
   age,
   position,
-  countryFlag,
   playerImage,
 }) => {
   return (
@@ -23,9 +21,9 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         className="absolute top-10 left-1/2 transform -translate-x-1/2 w-40 h-48 object-cover z-10 rounded-2xl"
       />
 
-      <div className="absolute bottom-32 w-full text-center">
+      {/* <div className="absolute bottom-32 w-full text-center">
         <div className="text-lg font-light">{name}</div>
-      </div>
+      </div> */}
 
       <div className="absolute bottom-5 w-full px-4 flex justify-between text-xs text-gray-300">
         <div className="flex flex-1 flex-col items-start">
@@ -36,10 +34,10 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           <span className="font-semibold">POSICIÓN</span>
           <span className="text-white">{position}</span>
         </div>
-        <div className="flex flex-1 flex-col items-end">
+        {/* <div className="flex flex-1 flex-col items-end">
           <span className="font-semibold">CIUDAD</span>
           <img src={countryFlag} alt="Country" className="w-5 h-4 mt-1" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
