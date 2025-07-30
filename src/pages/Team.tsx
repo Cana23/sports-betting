@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import PlayerCard from '../components/PlayerCard';
 import PlayerStats from '../components/PlayerStats'
+import Chatbot from '../components/Chatbot/IndexChatbot';
 
 import type { Player } from "../interfaces/Player";
 import { Positions } from '../interfaces/positions';
@@ -272,6 +273,9 @@ export default function Team() {
       )}
 
       <ToastContainer />
+      
+        <Chatbot />
     </div>
+    
   );
 }
